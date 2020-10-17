@@ -1,6 +1,14 @@
 <div class="mt-3">
 
-	<form class="p-4" wire:submit.prevent="AgregarTercero">
+	<div class="p-4">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+
+	<form class="p-4" >
 		<div class="text-center h4">Creacion de terceros</div>
 
 	  <div class="form-row mt-4">
@@ -34,6 +42,10 @@
 	      <label>Nombres y apellidos</label>
 	      <input type="text" class="form-control" wire:model="nombresApellidos">
 	       @error('nombresApellidos') <span class="error alert-danger text-danger">{{ $message }}</span> @enderror
+	    </div>
+
+	    <div class="form-group col-md-2">
+	      <button class="btn btn-info" wire:click.prevent="buscar({{ $identificacion }})">buscar</button>
 	    </div>
 
 	  </div>
@@ -108,7 +120,7 @@
 	    </div>
 	  </div>
 	  <div class=" align-content-center">
-	  	<button type="submit" class="btn btn-primary btn-block">Agregar cliente</button>
+	  	<button type="submit" class="btn btn-primary btn-block" wire:click.prevent="AgregarTercero">Agregar cliente</button>
 	  </div>
 	</form>
 

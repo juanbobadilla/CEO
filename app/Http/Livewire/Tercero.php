@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 //use App\Http\Requests\terceroRequest;
 use App\SuscripcionTercero;
+use Illuminate\Support\Facades\DB;
 
 class Tercero extends Component
 {
@@ -72,6 +73,7 @@ class Tercero extends Component
         //se limpia los campos
         $this->limpiarCampos();
 
+        session()->flash('message', 'Clientes ingresados correctamente');
         
     }
 
@@ -93,4 +95,15 @@ class Tercero extends Component
         $this->correo="";
     }
    
+   //metodo buscar
+    public function buscar($identificacion){
+
+        $validatedData = $this->validate([
+            'identificacion' => 'required',
+        ]);
+
+        $buscarTercero=DB::table('clientetercero')->where("identificacion",$identificacion)->get();
+        //dd($buscarTercero[0]->tipoIdentificacion);
+        $this->tipoIdentificacion=$buscarTercero[0]->tipoIdentificacion;
+    }
 }
