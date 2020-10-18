@@ -102,8 +102,14 @@ class Tercero extends Component
             'identificacion' => 'required',
         ]);
 
-        $buscarTercero=DB::table('clientetercero')->where("identificacion",$identificacion)->get();
-        //dd($buscarTercero[0]->tipoIdentificacion);
-        $this->tipoIdentificacion=$buscarTercero[0]->tipoIdentificacion;
+        $buscarTercero=DB::table('clientetercero')->where("identificacion","LIKE",$identificacion)->get();
+        $busqueda=count($buscarTercero);
+        if ($busqueda===1) {
+            $this->tipoIdentificacion=$buscarTercero[0]->tipoIdentificacion;
+        }else{
+            session()->flash('message', 'no existe el cliente');
+            $this->limpiarCampos();
+        }
+        
     }
 }
