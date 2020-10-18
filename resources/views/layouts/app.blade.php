@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,16 +24,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item dropdown">
+
+          <!-- lo que se puede ver cuando esta autenticad -->
+          @auth
+            <li class="nav-item active">
+              <livewire:logout/>
+            </li>
+              
+            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Suscripciones
             </a>
@@ -43,6 +41,22 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
+          @endauth
+
+          <!-- lo que se puede ver cuando no esta autenticado o eres un invitado -->
+          @guest
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ route('login') }}">Login</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ route('registro') }}">Registro</a>
+          </li>
+          @endguest
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          
         </ul>
       </div>
     </nav>
